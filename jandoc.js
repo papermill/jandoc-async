@@ -2,9 +2,13 @@
  * Expose the Jandoc API to JavaScript
  */
 
-var procedure = require('./lib/procedure'),
+var fs = require('fs-extra'),
+    path = require('path'),
+    procedure = require('./lib/procedure'),
     argParse  = require('./lib/argparser').parse,
     cmdLine   = require('child_process').exec;
+
+var jandocOptions = (fs.readJSONSync(path.join(__dirname, './options.json'))).options;
 
 /*
  * Trim extraneous whitespace from strings.
@@ -40,74 +44,7 @@ function bashifyKey(key) {
  * Pass an object to the jandoc function and each
  * key will represent a command line flag.
  *
- * Options -
- * input: DIR/FILE PATH
- * output: DIR/FILE PATH
- * read: FILE TYPE STRING
- * write: FILE TYPE STRING
- * dataDir: DIR PATH
- * strict: BOOLEAN
- * parseRaw: BOOLEAN
- * smart: BOOLEAN  // refers to smart quotes
- * oldDashes: BOOLEAN
- * baseHeaderLevel: NUMBER
- * indentedCodeClasses: STRING
- * nomalize: BOOLEAN
- * preserveTabs: BOOLEAN
- * tabStop: NUMBER
- * standalone: BOOLEAN
- * template: FILE PATH
- * variable: OBJECT
- * printDefaultTemplate: FILE PATH
- * noWrap: BOOLEAN
- * columns: NUMBER
- * toc: BOOLEAN
- * noHighlight: BOOLEAN
- * highlightStyle: STRING
- * includeInHeader: FILE PATH
- * includeBeforeBody: FILE PATH
- * includeAfterBody: FILE PATH
- * selfContained: BOOLEAN
- * offline: BOOLEAN
- * html5: BOOLEAN
- * ascii: BOOLEAN
- * referenceLinks: BOOLEAN
- * atxHeaders: BOOLEAN
- * chapters: BOOLEAN
- * numberSections: BOOLEAN
- * noTexLigatures: BOOLEAN
- * listings: BOOLEAN
- * incremental: BOOLEAN
- * slideLevel: NUMBER
- * sectionDivs: BOOLEAN
- * emailObfuscation: STRING (none || javascript || references)
- * idPrefix: STRING
- * titlePrefix: STRING
- * css: URL PATH
- * referenceOdt: FILE PATH
- * referenceDocx: FILE PATH
- * epubStylesheet: FILE PATH
- * epubCoverImage: FILE PATH
- * epubMetadata: FILE PATH
- * epubEmbedFont: ARRAY
- * latexEngine: PROGRAM NAME
- * bibliography: FILE PATH
- * csl: FILE PATH
- * citationAbbreviations: FILE PATH
- * natbib: BOOLEAN
- * biblatex: BOOLEAN
- * latexmathml: URL PATH
- * asciimathml: URL PATH
- * mathml: URL PATH
- * mimetex: URL PATH
- * webtex: URL PATH
- * jsmath: URL PATH
- * mathjax: URL PATH
- * gladtex: BOOLEAN
- * dumpArgs: BOOLEAN
- * ignoreArgs: BOOLEAN
- * version: BOOLEAN
- * help: BOOLEAN
+ * Options: see `./options.json`
  */
 function buildArgString(options) {
   var argString = '', key, type, val, i;
@@ -247,6 +184,9 @@ module.exports = (function () {
    * if Pandoc does exist, the user won't get held up by the check.  If
    * it doesn't, you'll get an error at some point.
    */
+  
+  // - attach options
+  jandoc.OPTIONS = jandocOptions;
   return jandoc;
 
 }());
