@@ -121,9 +121,7 @@ function callCommand(str, callback) {
       ]);
   
   if (callback) {
-    pandoc = procedure(cleanArgs, args, callback);  // initialize with both items
-  } else {
-    pandoc = procedure(cleanArgs, args);            // initialize with both items    
+    pandoc = procedure(cleanArgs, args, callback || null);  // initialize with both items
   }
 }
 
