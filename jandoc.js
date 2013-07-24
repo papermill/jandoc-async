@@ -231,7 +231,7 @@ module.exports = (function () {
    * When the module gets required, do an asynchronous check to see if
    * Pandoc exists on the system.
    */
-  cmdLine('which pandoc', function (err, stdout) {
+  cmdLine('pandoc -v', function (err, stdout) {
     
     /*
      * If 'which pandoc' throws an error, die.
