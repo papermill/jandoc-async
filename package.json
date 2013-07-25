@@ -1,6 +1,6 @@
 {
-  "name": "jandoc-async",
-  "description": "async for of 'jandoc'",
+  "name": "pandoc-api",
+  "description": "async fork of 'jandoc'",
   "bin": {
     "jandoc": "./bin/jandoc"
   },
@@ -34,8 +34,8 @@
     "haskell"
   ],
   "dependencies": {
-    "mkdirp": "~0.3.5",
-    "async": "~0.2.9"
+    "fs-extra": "0.6.x",
+    "async": "0.2.x"
   },
   "repository": {
     "type": "git",
