@@ -59,9 +59,9 @@ function buildArgString(options) {
        * specifically.
        */
       if (key === 'input') {
-        argString += (' -d ' + val);
+        argString += (' -d \"' + val + '\"');
       } else if (key === 'output') {
-        argString += (' -o ' + val);
+        argString += (' -o \"' + val + '\"');
       } else {
         
         /*
@@ -71,7 +71,7 @@ function buildArgString(options) {
         if (type === 'boolean') {
           argString += (' ' + bashifyKey(key));
         } else if (type !== 'object') {
-          argString += (' ' + bashifyKey(key) + ' ' + val);
+          argString += (' ' + bashifyKey(key) + ' \"' + val + '\"');
         } else {
           
           /*
@@ -81,7 +81,7 @@ function buildArgString(options) {
           if (key === 'variable') {
             for (i in val) {
               if (has(val, i)) {
-                argString += (' --variable ' + i + '=' + val[i]);
+                argString += (' --variable \"' + i + '\"=\"' + val[i] + '\"');
               }
             }
           
@@ -91,7 +91,7 @@ function buildArgString(options) {
            */
           } else if (key === 'epubEmbedFont') {
             for (i = 0; i < val.length; i += 1) {
-              argString += (' --epub-embed-font ' + val[i]);
+              argString += (' --epub-embed-font \"' + val[i] + '\"');
             }
           }
         }
