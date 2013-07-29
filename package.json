@@ -1,10 +1,10 @@
 {
   "name": "pandoc-api",
-  "description": "async fork of 'jandoc'",
+  "description": "async fork of 'jandoc' for internal use @papermill",
   "bin": {
     "jandoc": "./bin/jandoc"
   },
-  "version": "0.1.0",
+  "version": "0.1.0-pre2",
   "contributors": [
     {
       "name": "John Newman",
@@ -19,6 +19,7 @@
   "main": "jandoc.js",
   "readmeFilename": "README.md",
   "keywords": [
+    "papermill",
     "document",
     "converter",
     "generator",
@@ -39,6 +40,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/papermill/jandoc-async.git"
+    "url": "https://github.com/papermill/node-pandoc-api.git"
   }
 }
